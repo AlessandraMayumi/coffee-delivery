@@ -21,6 +21,20 @@ Although there are only a few functionalities, it require concepts such as:
 ## Figma
 https://www.figma.com/file/5yT9ZzZmRQRS4yivGGB3pl/Coffee-Delivery/duplicate
 
+### Create project
+Project name: coffee-delivery
+options:
+React
+TypeScript
+
+> npm create vite@latest
+
+### Use styled components
+```sh
+npm install styled-components
+npm install --save-dev @types/styled-components
+```
+
 ## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
