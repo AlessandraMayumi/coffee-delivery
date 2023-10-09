@@ -35,6 +35,22 @@ npm install styled-components
 npm install --save-dev @types/styled-components
 ```
 
+### Configure ESLint
+https://eslint.org/docs/latest/use/getting-started
+```sh
+npm init @eslint/config
+✔ How would you like to use ESLint? · problems
+✔ What type of modules does your project use? · esm
+✔ Which framework does your project use? · react
+✔ Does your project use TypeScript? · No / Yes
+✔ Where does your code run? · browser
+✔ What format do you want your config file to be in? · JavaScript
+The config requires the following dependencies:
+@typescript-eslint/eslint-plugin@latest eslint-plugin-react@latest @typescript-eslint/parser@latest
+✔ Would you like to install them now? · No / Yes
+✔ Which package manager do you want to use? · npm
+```
+
 ## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
