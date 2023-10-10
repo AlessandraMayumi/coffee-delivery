@@ -18,10 +18,10 @@ Although there are only a few functionalities, it require concepts such as:
 - Properties
 - Componentization
 
-## Figma
+### Figma
 https://www.figma.com/file/5yT9ZzZmRQRS4yivGGB3pl/Coffee-Delivery/duplicate
 
-### Create project
+## Create project
 Project name: coffee-delivery
 options:
 React
@@ -29,13 +29,7 @@ TypeScript
 
 > npm create vite@latest
 
-### Use styled components
-```sh
-npm install styled-components
-npm install --save-dev @types/styled-components
-```
-
-### Configure ESLint
+## Configure ESLint
 https://eslint.org/docs/latest/use/getting-started
 ```sh
 npm init @eslint/config
@@ -50,6 +44,92 @@ The config requires the following dependencies:
 ✔ Would you like to install them now? · No / Yes
 ✔ Which package manager do you want to use? · npm
 ```
+
+## Use styled components
+```sh
+npm install styled-components
+npm install --save-dev @types/styled-components
+```
+
+Create a theme `default.ts`
+```js
+export const defaultTheme = {
+  'base-title': '#272221',
+...
+  'white': '#FFFFFF',
+};
+```
+
+Create a global style `global.ts`
+```js
+import { createGlobalStyle } from "styled-components";
+
+export const GlobalStyle = createGlobalStyle`
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+...
+    body, input, textarea, button {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        font-size: 1rem;
+    }
+`
+```
+
+Injects the theme into all styled components `src/App.tsx`
+```js
+import { ThemeProvider } from "styled-components"
+import { defaultTheme } from "./styles/default"
+import { GlobalStyle } from "./styles/global"
+
+function App() {
+
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      ...
+      <GlobalStyle />
+    </ThemeProvider>
+  )
+}
+```
+
+## React router dom
+```sh
+npm install react-router-dom
+```
+Define the routes for your application:
+```js
+import { Routes, Route } from 'react-router-dom';
+
+export function Router() {
+  return (
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/checkout' element={<Checkout />} />
+    </Routes>
+  );
+}
+```
+To enable the router for the app:
+```js
+import { Router } from './Router';
+import { BrowserRouter } from 'react-router-dom';
+
+function App() {
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+      <GlobalStyle />
+    </ThemeProvider>
+  );
+}
+```
+
 
 ## React + TypeScript + Vite
 
