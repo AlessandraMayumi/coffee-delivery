@@ -130,6 +130,20 @@ function App() {
 }
 ```
 
+## Phosphor react
+> npm install phosphor-react
+
+```js
+import { ShoppingCart } from 'phosphor-react';
+
+export function Header() {
+  return (
+    <HeaderContainer>
+      <ShoppingCart size={24} weight='fill' />
+    </HeaderContainer>
+  );
+}
+```
 
 ## React + TypeScript + Vite
 
