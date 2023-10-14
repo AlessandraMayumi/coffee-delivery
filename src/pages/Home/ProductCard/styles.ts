@@ -20,10 +20,6 @@ export const ItemContainer = styled.div`
         height: 7.5rem;
         margin-top: -2rem;
     }
-    h2 {
-        color: ${props => props.theme['base-subitle']};
-        font-family: 'Baloo 2';
-    }
     p {
         color: ${props => props.theme['base-label']};;
     }
@@ -53,7 +49,7 @@ export const TagContainer = styled.div`
     gap: .5rem;
 
     h3 {
-        color: ${props => props.theme['yellow-dark']};;
+        color: ${props => props.theme['yellow-dark']};
         background: ${props => props.theme['yellow-light']};
         padding: .3rem;
         border-radius: 6px;

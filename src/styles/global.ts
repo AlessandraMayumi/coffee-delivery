@@ -18,4 +18,8 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-size: .9rem;
   }
+  h2 {
+    color: ${props => props.theme['base-subitle']};
+    font-family: 'Baloo 2';
+  }
 `;

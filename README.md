@@ -145,6 +145,9 @@ export function Header() {
 }
 ```
 
+## HTML Form
+https://www.w3schools.com/html/html_forms.asp
+
 ## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
