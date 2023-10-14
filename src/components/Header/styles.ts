@@ -24,12 +24,3 @@ export const LocationContainer = styled.div`
     color: ${props => props.theme['purple-dark']};
   }
 `;
-
-export const CartContainer = styled.div`
-  display: flex;
-  align-items: center;
-  padding: .5rem;
-  border-radius: 4px;
-  background: ${props => props.theme['yellow-light']};
-  color: ${props => props.theme['yellow-dark']};
-`;
