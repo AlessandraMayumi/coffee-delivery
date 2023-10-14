@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import { ShoppingCart } from 'phosphor-react';
 import { CartContainer } from './styles';
 
@@ -11,12 +10,10 @@ interface CartProps {
   colorTheme?: string
 }
 
-export function Cart({ colorTheme=ColorTheme.yellow }: CartProps) {
+export function Cart({ colorTheme = ColorTheme.yellow }: CartProps) {
   return (
-    <NavLink to='/checkout' title='Checkout '>
-      <CartContainer colorTheme={colorTheme}>
-        <ShoppingCart size={24} weight='fill' />
-      </CartContainer>
-    </NavLink>
+    <CartContainer colorTheme={colorTheme}>
+      <ShoppingCart size={24} weight='fill' />
+    </CartContainer>
   );
 }
