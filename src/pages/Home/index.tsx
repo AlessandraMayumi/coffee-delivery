@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { CoffeeCard, CoffeeCardType } from './CoffeeCard';
+import { ProductCard, ProductType } from './ProductCard';
 import { CoffeeListContainer, HomeContainer } from './styles';
 import { COFFEE_LIST } from '../../constants/catalog';
 
 export function Home() {
-  const [coffees, setCoffees] = useState<Array<CoffeeCardType>>(COFFEE_LIST);
+  const [coffees, setCoffees] = useState<Array<ProductType>>(COFFEE_LIST);
 
   const CoffeeList = coffees.map(c => {
-    const { title, tags, description, thumbnail, price } = c;
+    const { id, title, tags, description, thumbnail, price } = c;
     return (
-      <CoffeeCard
-        key={title}
+      <ProductCard
+        key={id}
+        id={id}
         title={title}
         tags={tags}
         description={description}
