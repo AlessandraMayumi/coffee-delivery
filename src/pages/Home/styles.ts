@@ -11,7 +11,7 @@ export const HomeContainer = styled.div`
   }
 `;
 
-export const CoffeeListContainer = styled.div`
+export const ProductListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 2rem
