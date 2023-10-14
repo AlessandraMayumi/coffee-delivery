@@ -1,6 +1,7 @@
 import { BuyContainer, ItemContainer, PriceContainer, TagContainer } from './styles';
 import { Counter } from '../../../components/Counter';
-import { Cart, ColorTheme } from '../../../components/Cart';
+import { Cart } from '../../../components/Cart';
+import { ColorTheme } from '../../../constants/ColorTheme';
 
 export interface ProductType {
   id: string,

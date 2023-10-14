@@ -1,17 +1,18 @@
-import { MapPinLine } from 'phosphor-react';
-import { CheckoutContainer, CompleteContainer, OrderContainer } from './styles';
+import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from 'phosphor-react';
+import { CheckoutContainer, CompleteContainer, IconContainer, OrderContainer, PaymentButton, PaymentContainer } from './styles';
+import { ColorTheme } from '../../constants/ColorTheme';
 
 export function Checkout() {
   return (
     <CheckoutContainer>
       <CompleteContainer>
         <h2>Complete your order</h2>
-        <span>
+        <span id='address'>
           <nav>
-            <i><MapPinLine size={24} /></i>
+            <IconContainer $colorTheme={ColorTheme.yellow}><MapPinLine size={24} /></IconContainer>
             <div>
               <h3>Delivery Address</h3>
-              <p>Please provide the address where you would like to receive your order</p>
+              <p>Please provide the address where you would like to receive your order.</p>
             </div>
           </nav>
           <form>
@@ -22,7 +23,29 @@ export function Checkout() {
             <input type='text' placeholder='Apartment' />
           </form>
         </span>
-        <span>Payment</span>
+        <span id='payment'>
+          <nav>
+            <IconContainer $colorTheme={ColorTheme.purple}><CurrencyDollar size={24} /></IconContainer>
+            <div>
+              <h3>Payment</h3>
+              <p>Please provide the address where you would like to receive your order.</p>
+            </div>
+          </nav>
+          <PaymentContainer>
+            <PaymentButton $isSelected={false}>
+              <IconContainer $colorTheme={ColorTheme.purple}><CreditCard size={24} /></IconContainer>
+              <p>Credit Card</p>
+            </PaymentButton>
+            <PaymentButton $isSelected={false}>
+              <IconContainer $colorTheme={ColorTheme.purple}><Bank size={24} /></IconContainer>
+              <p>Debit Card</p>
+            </PaymentButton>
+            <PaymentButton $isSelected={true}>
+              <IconContainer $colorTheme={ColorTheme.purple}><Money size={24} /></IconContainer>
+              <p>Cash</p>
+            </PaymentButton>
+          </PaymentContainer>
+        </span>
       </CompleteContainer>
       <OrderContainer>
         <h2>Selected coffees</h2>

@@ -148,6 +148,14 @@ export function Header() {
 ## HTML Form
 https://www.w3schools.com/html/html_forms.asp
 
+## Conditional styling 
+
+```js
+export const IconContainer = styled.div<{ $colorTheme: string }>`
+  color: ${props => props.$colorTheme === ColorTheme.yellow ? props.theme['yellow-dark'] : props.theme['purple'] };
+`;
+```
+
 ## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

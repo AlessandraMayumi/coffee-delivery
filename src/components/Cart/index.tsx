@@ -1,10 +1,6 @@
 import { ShoppingCart } from 'phosphor-react';
 import { CartContainer } from './styles';
-
-export enum ColorTheme {
-  yellow = 'yellow',
-  purple = 'purple',
-}
+import { ColorTheme } from '../../constants/ColorTheme';
 
 interface CartProps {
   colorTheme?: string
@@ -12,7 +8,7 @@ interface CartProps {
 
 export function Cart({ colorTheme = ColorTheme.yellow }: CartProps) {
   return (
-    <CartContainer colorTheme={colorTheme}>
+    <CartContainer $colorTheme={colorTheme}>
       <ShoppingCart size={24} weight='fill' />
     </CartContainer>
   );
