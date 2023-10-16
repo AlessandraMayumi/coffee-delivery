@@ -1,5 +1,5 @@
 import { BuyContainer, ItemContainer, PriceContainer, TagContainer } from './styles';
-import { Counter } from '../../../components/Counter';
+import { InputNumber } from '../../../components/InputNumber';
 import { Cart } from '../../../components/Cart';
 import { ColorTheme } from '../../../constants/ColorTheme';
 
@@ -12,7 +12,7 @@ export interface ProductType {
   price: number,
 }
 
-export function ProductCard({
+export function ProductCatalog({
   title,
   tags,
   description,
@@ -30,7 +30,7 @@ export function ProductCard({
       <p>{description}</p>
       <BuyContainer>
         <PriceContainer>$<h2>{price.toFixed(2)}</h2></PriceContainer>
-        <Counter />
+        <InputNumber />
         <Cart colorTheme={ColorTheme.purple} />
       </BuyContainer>
     </ItemContainer>

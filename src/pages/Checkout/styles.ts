@@ -41,7 +41,7 @@ export const CompleteContainer = styled.div`
   }
 `;
 
-export const OrderContainer = styled.div`
+export const SelectedContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;

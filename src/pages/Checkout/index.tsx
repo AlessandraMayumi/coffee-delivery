@@ -1,6 +1,7 @@
-import { CheckoutContainer, CompleteContainer, OrderContainer } from './styles';
+import { CheckoutContainer, CompleteContainer, SelectedContainer } from './styles';
 import { Payment } from './Payment';
 import { Address } from './Address';
+import { Order } from './Order';
 
 export function Checkout() {
   return (
@@ -10,10 +11,10 @@ export function Checkout() {
         {Address()}
         {Payment()}
       </CompleteContainer>
-      <OrderContainer>
+      <SelectedContainer>
         <h2>Selected coffees</h2>
-        <span>Total</span>
-      </OrderContainer>
+        {Order()}
+      </SelectedContainer>
     </CheckoutContainer>
   );
 }

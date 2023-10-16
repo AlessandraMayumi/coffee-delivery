@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ProductCard, ProductType } from './ProductCard';
+import { ProductCatalog, ProductType } from './ProductCatalog';
 import { ProductListContainer, HomeContainer } from './styles';
 import { COFFEE_LIST } from '../../constants/catalog';
 
@@ -9,7 +9,7 @@ export function Home() {
   const ProductList = coffees.map(c => {
     const { id, title, tags, description, thumbnail, price } = c;
     return (
-      <ProductCard
+      <ProductCatalog
         key={id}
         id={id}
         title={title}

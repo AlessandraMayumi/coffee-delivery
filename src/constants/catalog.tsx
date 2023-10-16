@@ -12,7 +12,7 @@ import cubano from '../assets/cubano.svg';
 import havaiano from '../assets/havaiano.svg';
 import arabe from '../assets/arabe.svg';
 import irlandes from '../assets/irlandes.svg';
-import { ProductType } from '../pages/Home/ProductCard';
+import { ProductType } from '../pages/Home/ProductCatalog';
 
 export const COFFEE_LIST: Array<ProductType> = [
   {
