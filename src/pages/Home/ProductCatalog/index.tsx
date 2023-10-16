@@ -1,7 +1,6 @@
-import { BuyContainer, ItemContainer, PriceContainer, TagContainer } from './styles';
-import { InputNumber } from '../../../components/InputNumber';
-import { Cart } from '../../../components/Cart';
-import { ColorTheme } from '../../../constants/ColorTheme';
+import { BuyContainer, CartContainer, IconContainer, InputNumberContainer, ItemContainer, PriceContainer, TagContainer } from './styles';
+import { Minus, Plus, ShoppingCart } from 'phosphor-react';
+import { useState } from 'react';
 
 export interface ProductType {
   id: string,
@@ -19,9 +18,24 @@ export function ProductCatalog({
   thumbnail,
   price,
 }: ProductType) {
+  const [count, setCount] = useState(1);
+
+  function increment() {
+    setCount(count + 1);
+  }
+
+  function decrement() {
+    if (count > 0) setCount(count - 1);
+  }
+
+  function addToCart() {
+    // TODO: update cart
+  }
+
   function Tags() {
     return tags.map(tag => <h3 key={title + tag}>{tag}</h3>);
   }
+
   return (
     <ItemContainer>
       <img src={thumbnail} />
@@ -30,8 +44,17 @@ export function ProductCatalog({
       <p>{description}</p>
       <BuyContainer>
         <PriceContainer>$<h2>{price.toFixed(2)}</h2></PriceContainer>
-        <InputNumber />
-        <Cart colorTheme={ColorTheme.purple} />
+
+        <InputNumberContainer>
+          <IconContainer onClick={decrement}><Minus size={12} /></IconContainer>
+          <p>{count}</p>
+          <IconContainer onClick={increment}><Plus size={12} /></IconContainer>
+        </InputNumberContainer>
+
+        <CartContainer onClick={addToCart}>
+          <ShoppingCart size={24} weight='fill' />
+        </CartContainer>
+
       </BuyContainer>
     </ItemContainer>
   );
