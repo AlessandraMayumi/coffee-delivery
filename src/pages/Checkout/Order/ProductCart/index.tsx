@@ -5,7 +5,7 @@ import { Trash } from 'phosphor-react';
 
 export function ProductCart({ title, thumbnail, price }: ProductType) {
   return (
-    <ProductContainer>
+    <ProductContainer key={title}>
       <ThumbnailContainer>
         <img src={thumbnail} />
       </ThumbnailContainer>
