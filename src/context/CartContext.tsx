@@ -18,6 +18,7 @@ interface CartContextType {
   findProductById: (productId: string) => ProductType | undefined
   cart: Order[]
   addOrUpdateCart: (order: Order) => void
+  removeFromCart: (productId: string) => void
 }
 
 /** Context */
@@ -47,6 +48,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     }
   }
 
+  function removeFromCart(productId: string) {
+    setCart(cart.filter(c => c.productId !== productId));
+  }
+
   useEffect(() => {
     // const stateJSON = JSON.stringify(cart);
     // localStorage.setItem('@coffee-delivery:cart-state', stateJSON);
@@ -59,6 +64,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       findProductById,
       cart,
       addOrUpdateCart,
+      removeFromCart,
     }} >
       {children}
     </CartContext.Provider>

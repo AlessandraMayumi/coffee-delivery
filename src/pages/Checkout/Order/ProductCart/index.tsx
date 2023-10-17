@@ -2,8 +2,12 @@ import { ProductContainer, InfoContainer, ThumbnailContainer, ButtonContainer, I
 import { InputNumber } from '../../../../components/InputNumber';
 import { ProductType } from '../../../Home/ProductCatalog';
 import { Trash } from 'phosphor-react';
+import { useContext } from 'react';
+import { CartContext } from '../../../../context/CartContext';
 
-export function ProductCart({ title, thumbnail, price }: ProductType) {
+export function ProductCart({ id, title, thumbnail, price }: ProductType) {
+  const { removeFromCart } = useContext(CartContext);
+
   return (
     <ProductContainer key={title}>
       <ThumbnailContainer>
@@ -13,10 +17,8 @@ export function ProductCart({ title, thumbnail, price }: ProductType) {
         <h3>{title}</h3>
         <nav>
           <InputNumber />
-          <ButtonContainer>
-            <IconContainer>
-              <Trash size={20} />
-            </IconContainer>
+          <ButtonContainer onClick={() => removeFromCart(id)}>
+            <IconContainer><Trash size={20} /></IconContainer>
             <p>Remove</p>
           </ButtonContainer>
         </nav>

@@ -31,6 +31,8 @@ export const InfoContainer = styled.div`
     }
 `;
 
+/** Button REMOVE */
+
 export const ButtonContainer = styled.button`
     display: flex;
     flex-direction: row;
@@ -38,7 +40,6 @@ export const ButtonContainer = styled.button`
     align-items: center;
 
     width: 6rem;
-    height: 2rem;
     padding: 0 0.5rem;
     border-radius: 6px;
     border: none;
@@ -46,6 +47,9 @@ export const ButtonContainer = styled.button`
     background: ${props => props.theme['base-button']};
     p {
         text-transform: uppercase;
+    }
+    &:hover{
+        background: ${props => props.theme['base-hover']};
     }
 `;
 
