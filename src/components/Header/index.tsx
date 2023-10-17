@@ -7,7 +7,7 @@ import { HeaderContainer, LocationContainer } from './styles';
 export function Header() {
   return (
     <HeaderContainer>
-      <a href='/' target=''><img src={logo} /></a>
+      <NavLink to='/' title='Home '><img src={logo} /></NavLink>
       <nav>
         <LocationContainer><MapPin size={24} weight="fill" /><p>Location, LL</p></LocationContainer>
         <NavLink to='/checkout' title='Checkout '>

@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { ProductCatalog, ProductType } from './ProductCatalog';
+import { useContext } from 'react';
+import { ProductCatalog } from './ProductCatalog';
 import { ProductListContainer, HomeContainer } from './styles';
-import { COFFEE_LIST } from '../../constants/catalog';
+import { CartContext } from '../../context/CartContext';
 
 export function Home() {
-  const [coffees, setCoffees] = useState<Array<ProductType>>(COFFEE_LIST);
+  // Context
+  const { products } = useContext(CartContext);
 
-  const ProductList = coffees.map(c => {
-    const { id, title, tags, description, thumbnail, price } = c;
+  const ProductList = products.map(p => {
+    const { id, title, tags, description, thumbnail, price } = p;
     return (
       <ProductCatalog
         key={id}

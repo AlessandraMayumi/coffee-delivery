@@ -156,6 +156,86 @@ export const IconContainer = styled.div<{ $colorTheme: string }>`
 `;
 ```
 
+## Component API
+The Context API in React provides a means for components to exchange data within an application, offering a simpler alternative to passing props and alleviating the common problem of prop drilling, which arises when numerous layers in the component hierarchy require access to specific data.
+
+### Generic implementation for Context Provider
+To make the context API available through the entire app, is a nice solution to use ReactNode as a prop for the context provider. Then wrap the router in the `App.js`.
+
+`context/CartContext.tsx`
+```js
+import { ReactNode, createContext, useEffect, useState } from 'react';
+
+// Context Provider - props
+interface CartContextProviderProps {
+  children: ReactNode
+}
+
+/** Context */
+export const CartContext = createContext({} as CartContextType);
+
+/** Context Provider */
+export function CartContextProvider({ children }: CartContextProviderProps) {
+  const [cart, setCart] = useState<Order[]>([]);
+  function addOrUpdateCart(order: Order) {
+    ...
+  }
+
+  return (
+    <CartContext.Provider value={{ cart, addOrUpdateCart }} >
+      {children}
+    </CartContext.Provider>
+  );
+}
+```
+`App.js`
+```js
+import { Router } from './Router';
+import { BrowserRouter } from 'react-router-dom';
+import { CartContextProvider } from './context/ProductContext';
+
+function App() {
+  return (
+    ...
+      <CartContextProvider>
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
+      </CartContextProvider>
+    ...
+  );
+}
+```
+
+### React Router DOM *NavLink* over *href*
+Intead of HTML href
+```js
+<a href='/' target=''><img src={logo} /></a>
+```
+Use the *NavLink* from react-router-dom
+```js
+<NavLink to='/' title='Home '><img src={logo} /></NavLink>
+```
+In order to have access to the Context API, because the *context provider* is  wraping the entire `<Route>`
+```js
+import { Router } from './Router';
+import { BrowserRouter } from 'react-router-dom';
+import { CartContextProvider } from './context/ProductContext';
+
+function App() {
+  return (
+    ...
+      <CartContextProvider>
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
+      </CartContextProvider>
+    ...
+```
+
+### TODO: use local storage to refresh the page
+
+
 ## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

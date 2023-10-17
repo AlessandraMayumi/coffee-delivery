@@ -1,6 +1,7 @@
 import { BuyContainer, CartContainer, IconContainer, InputNumberContainer, ItemContainer, PriceContainer, TagContainer } from './styles';
 import { Minus, Plus, ShoppingCart } from 'phosphor-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CartContext } from '../../../context/CartContext';
 
 export interface ProductType {
   id: string,
@@ -12,12 +13,16 @@ export interface ProductType {
 }
 
 export function ProductCatalog({
+  id,
   title,
   tags,
   description,
   thumbnail,
   price,
 }: ProductType) {
+  // Context
+  const { addOrUpdateCart } = useContext(CartContext);
+  // State
   const [count, setCount] = useState(1);
 
   function increment() {
@@ -26,10 +31,6 @@ export function ProductCatalog({
 
   function decrement() {
     if (count > 0) setCount(count - 1);
-  }
-
-  function addToCart() {
-    // TODO: update cart
   }
 
   function Tags() {
@@ -51,7 +52,7 @@ export function ProductCatalog({
           <IconContainer onClick={increment}><Plus size={12} /></IconContainer>
         </InputNumberContainer>
 
-        <CartContainer onClick={addToCart}>
+        <CartContainer onClick={() => addOrUpdateCart({ productId: id, quantity: count })}>
           <ShoppingCart size={24} weight='fill' />
         </CartContainer>
 

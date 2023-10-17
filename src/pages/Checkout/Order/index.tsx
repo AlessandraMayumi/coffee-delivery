@@ -1,24 +1,23 @@
-import tradicional from '../,,/../../../assets/tradicional.svg';
-import latte from '../,,/../../../assets/latte.svg';
 import { TotalContainer, ButtonContainer } from './styles';
 import { ProductCart } from './ProductCart';
+import { useContext } from 'react';
+import { CartContext } from '../../../context/CartContext';
 
 export function Order() {
+  // Context
+  const { cart, findProductById } = useContext(CartContext);
+
   function Products() {
-    return (
-      <>
-        {ProductCart({
-          title: 'Expresso Tradicional',
-          price: 9.90,
-          thumbnail: tradicional
-        })}
-        {ProductCart({
-          title: 'Latte',
-          price: 12.90,
-          thumbnail: latte
-        })}
-      </>
-    );
+    console.log(cart);
+    if (cart) {
+      const productsInCart = cart.map(order => findProductById(order.productId));
+      if (productsInCart) {
+        return productsInCart.map(product => {
+          if (product) return ProductCart(product);
+        });
+      }
+    }
+    return <></>;
   }
   return (
     <span id='order'>
