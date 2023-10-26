@@ -5,17 +5,13 @@ import { CartContext } from '../../../context/CartContext';
 
 export function Order() {
   // Context
-  const { cart, findProductById } = useContext(CartContext);
+  const { cartProducts } = useContext(CartContext);
 
   function Products() {
-    console.log(cart);
-    if (cart) {
-      const productsInCart = cart.map(order => findProductById(order.productId));
-      if (productsInCart) {
-        return productsInCart.map(product => {
-          if (product) return ProductCart(product);
-        });
-      }
+    if (cartProducts) {
+      return cartProducts.map(product => {
+        if (product) return ProductCart(product);
+      });
     }
     return <></>;
   }

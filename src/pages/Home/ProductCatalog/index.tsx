@@ -1,7 +1,8 @@
-import { BuyContainer, CartContainer, IconContainer, InputNumberContainer, ItemContainer, PriceContainer, TagContainer } from './styles';
-import { Minus, Plus, ShoppingCart } from 'phosphor-react';
+import { BuyContainer, CartContainer, ItemContainer, PriceContainer, TagContainer } from './styles';
+import { ShoppingCart } from 'phosphor-react';
 import { useContext, useState } from 'react';
 import { CartContext } from '../../../context/CartContext';
+import { InputNumber } from '../../../components/InputNumber';
 
 export interface ProductType {
   id: string,
@@ -23,14 +24,14 @@ export function ProductCatalog({
   // Context
   const { addOrUpdateCart } = useContext(CartContext);
   // State
-  const [count, setCount] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
   function increment() {
-    setCount(count + 1);
+    setQuantity(quantity + 1);
   }
 
   function decrement() {
-    if (count > 0) setCount(count - 1);
+    if (quantity > 0) setQuantity(quantity - 1);
   }
 
   function Tags() {
@@ -46,13 +47,13 @@ export function ProductCatalog({
       <BuyContainer>
         <PriceContainer>$<h2>{price.toFixed(2)}</h2></PriceContainer>
 
-        <InputNumberContainer>
-          <IconContainer onClick={decrement}><Minus size={12} /></IconContainer>
-          <p>{count}</p>
-          <IconContainer onClick={increment}><Plus size={12} /></IconContainer>
-        </InputNumberContainer>
+        {InputNumber({
+          quantity,
+          minus: decrement,
+          plus: increment,
+        })}
 
-        <CartContainer onClick={() => addOrUpdateCart({ productId: id, quantity: count })}>
+        <CartContainer onClick={() => addOrUpdateCart({ productId: id, quantity })}>
           <ShoppingCart size={24} weight='fill' />
         </CartContainer>
 
