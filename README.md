@@ -233,6 +233,41 @@ function App() {
     ...
 ```
 
+## UseReducer
+https://react.dev/reference/react/useReducer
+```js
+const [cart, dispatch] = useReducer(reducerCart, []);
+```
+
+`reducer.js`
+```js
+export function reducerCart(state: OrderType[], action: any) {
+  switch (action.type) {
+  case ActionTypes.REMOVE: {
+    return state.filter(c => c.id !== action.id);
+  }
+  ...
+  default:
+    return state;
+  }
+}
+```
+`actions.js`
+```js
+export function addOrUpdateCartAction(order: OrderType) {
+  return { 
+    type: ActionTypes.ADD_OR_UPDATE, 
+    order 
+  };
+}
+```
+usage
+```js
+function addOrUpdateCart(order: OrderType) {
+  dispatch(addOrUpdateCartAction(order));
+}
+```
+
 ### TODO: use local storage to refresh the page
 
 

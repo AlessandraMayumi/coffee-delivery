@@ -53,7 +53,7 @@ export function ProductCatalog({
           plus: increment,
         })}
 
-        <CartContainer onClick={() => addOrUpdateCart({ productId: id, quantity })}>
+        <CartContainer onClick={() => addOrUpdateCart({ id, quantity })}>
           <ShoppingCart size={24} weight='fill' />
         </CartContainer>
 

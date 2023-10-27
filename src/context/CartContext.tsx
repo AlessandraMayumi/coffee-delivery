@@ -1,6 +1,8 @@
-import { ReactNode, createContext, useEffect, useState } from 'react';
+import { ReactNode, createContext, useEffect, useReducer, useState } from 'react';
 import { COFFEE_LIST } from '../constants/catalog';
 import { ProductType } from '../pages/Home/ProductCatalog';
+import { OrderType, reducerCart } from '../reducers/carts/reducer';
+import { addOrUpdateCartAction, decrementCartAction, incrementCartAction, removeFromCartAction } from '../reducers/carts/actions';
 
 // Context Provider Props
 interface CartContextProviderProps {
@@ -8,19 +10,14 @@ interface CartContextProviderProps {
 }
 
 // Context Type
-interface Order {
-  productId: string,
-  quantity: number
-}
-
 interface CartContextType {
   products: ProductType[]
-  findProductById: (productId: string) => ProductType | undefined
+  findProductById: (id: string) => ProductType | undefined
   cartProducts: (CartProductType | undefined)[]
-  addOrUpdateCart: (order: Order) => void
-  removeFromCart: (productId: string) => void
-  incrementCart: (productId: string) => void,
-  decrementCart: (productId: string) => void,
+  addOrUpdateCart: (order: OrderType) => void
+  removeFromCart: (id: string) => void
+  incrementCart: (id: string) => void
+  decrementCart: (id: string) => void
 }
 
 export interface CartProductType extends ProductType {
@@ -33,65 +30,28 @@ export const CartContext = createContext({} as CartContextType);
 /** Context Provider */
 export function CartContextProvider({ children }: CartContextProviderProps) {
   // State
-  const [cart, setCart] = useState<Order[]>([]);
+  const [cart, dispatch] = useReducer(reducerCart, []);
   const [cartProducts, setCartProducts] = useState<(CartProductType | undefined)[]>([]);
   const products = COFFEE_LIST;
 
-  function findProductById(productId: string) {
-    return products.find(p => p.id === productId);
+  function findProductById(id: string) {
+    return products.find(p => p.id === id);
   }
 
-  function addOrUpdateCart(order: Order) {
-    const orderInCart = cart.find(c => c.productId === order.productId);
-    if (orderInCart) {
-      const newCart = cart.map(item => {
-        if (item.productId === order.productId) return order;
-        return item;
-      });
-      setCart(newCart);
-    }
-    else {
-      setCart([...cart, order]);
-    }
+  function addOrUpdateCart(order: OrderType) {
+    dispatch(addOrUpdateCartAction(order));
   }
 
-  function removeFromCart(productId: string) {
-    setCart(cart.filter(c => c.productId !== productId));
+  function removeFromCart(id: string) {
+    dispatch(removeFromCartAction(id));
   }
 
-  function incrementCart(productId: string) {
-    const orderInCart = cart.find(c => c.productId === productId);
-    if (orderInCart) {
-      const newCart = cart.map(item => {
-        if (item.productId === productId) {
-          return {
-            productId,
-            quantity: item.quantity + 1,
-          };
-        }
-        return item;
-      });
-      setCart(newCart);
-    }
+  function incrementCart(id: string) {
+    dispatch(incrementCartAction(id));
   }
 
-  function decrementCart(productId: string) {
-    const orderInCart = cart.find(c => c.productId === productId);
-    if (orderInCart && orderInCart.quantity > 1) {
-      const newCart = cart.map(item => {
-        if (item.productId === productId) {
-          return {
-            productId,
-            quantity: item.quantity - 1,
-          };
-        }
-        return item;
-      });
-      setCart(newCart);
-    } 
-    else {
-      removeFromCart(productId);
-    }
+  function decrementCart(id: string) {
+    dispatch(decrementCartAction(id));
   }
 
   useEffect(() => {
@@ -102,8 +62,8 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     if (!cart) setCartProducts([]);
     else {
       setCartProducts(cart.map(order => {
-        const { productId, quantity } = order;
-        const product = findProductById(productId);
+        const { id, quantity } = order;
+        const product = findProductById(id);
         if (product) return {
           ...product,
           quantity
