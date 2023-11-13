@@ -18,6 +18,7 @@ interface CartContextType {
   removeFromCart: (id: string) => void
   incrementCart: (id: string) => void
   decrementCart: (id: string) => void
+  cartTotalCount: number
 }
 
 export interface CartProductType extends ProductType {
@@ -32,6 +33,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   // State
   const [cart, dispatch] = useReducer(reducerCart, []);
   const [cartProducts, setCartProducts] = useState<(CartProductType | undefined)[]>([]);
+  const [cartTotalCount, setCartTotalCount] = useState(0);
   const products = COFFEE_LIST;
 
   function findProductById(id: string) {
@@ -61,14 +63,19 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     // list all products in the cart
     if (!cart) setCartProducts([]);
     else {
+      let count = 0;
       setCartProducts(cart.map(order => {
         const { id, quantity } = order;
         const product = findProductById(id);
-        if (product) return {
-          ...product,
-          quantity
-        };
+        if (product) {
+          count += quantity;
+          return {
+            ...product,
+            quantity
+          };
+        }
       }));
+      setCartTotalCount(count);
     }
   }, [cart]);
 
@@ -81,6 +88,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       removeFromCart,
       incrementCart,
       decrementCart,
+      cartTotalCount,
     }} >
       {children}
     </CartContext.Provider>

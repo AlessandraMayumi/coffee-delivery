@@ -10,6 +10,10 @@ export const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 0.5rem;
+
+    a:link {
+    text-decoration: none;
+  }
   }
 `;
 
