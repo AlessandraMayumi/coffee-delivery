@@ -9,14 +9,14 @@ interface CartProps {
 }
 
 export function Cart({ colorTheme = ColorTheme.yellow }: CartProps) {
-  const { cartTotalCount } = useContext(CartContext);
+  const { cartCount } = useContext(CartContext);
 
   return (
     <>
       <CartContainer $colorTheme={colorTheme}>
         <ShoppingCart size={24} weight='fill' />
       </CartContainer>
-      {!!cartTotalCount && <CounterContainer>{cartTotalCount}</CounterContainer>}
+      {!!cartCount && <CounterContainer>{cartCount}</CounterContainer>}
     </>
   );
 }

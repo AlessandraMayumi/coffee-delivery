@@ -5,7 +5,7 @@ import { CartContext } from '../../../context/CartContext';
 
 export function Order() {
   // Context
-  const { cartProducts } = useContext(CartContext);
+  const { cartProducts, cartCost, cartProductsCost, cartDeliveryCost } = useContext(CartContext);
 
   function Products() {
     if (cartProducts) {
@@ -23,15 +23,15 @@ export function Order() {
           <tbody>
             <tr>
               <td align='left'>Total items</td>
-              <td align='right'>$ 29.70</td>
+              <td align='right'>$ {cartProductsCost.toFixed(2)}</td>
             </tr>
             <tr>
               <td align='left'>Delivery</td>
-              <td align='right'>$ 3.50</td>
+              <td align='right'>$ {cartDeliveryCost.toFixed(2)}</td>
             </tr>
             <tr>
               <th align='left'>Total</th>
-              <th align='right'>$ 33.20</th>
+              <th align='right'>$ {cartCost.toFixed(2)}</th>
             </tr>
           </tbody>
         </table>

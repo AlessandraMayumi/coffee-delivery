@@ -11,14 +11,20 @@ interface CartContextProviderProps {
 
 // Context Type
 interface CartContextType {
+  // props
   products: ProductType[]
-  findProductById: (id: string) => ProductType | undefined
   cartProducts: (CartProductType | undefined)[]
+  cartCount: number
+  cartCost: number
+  cartProductsCost: number
+  cartDeliveryCost: number
+  // functions
+  findProductById: (id: string) => ProductType | undefined
   addOrUpdateCart: (order: OrderType) => void
   removeFromCart: (id: string) => void
   incrementCart: (id: string) => void
   decrementCart: (id: string) => void
-  cartTotalCount: number
+
 }
 
 export interface CartProductType extends ProductType {
@@ -33,7 +39,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   // State
   const [cart, dispatch] = useReducer(reducerCart, []);
   const [cartProducts, setCartProducts] = useState<(CartProductType | undefined)[]>([]);
-  const [cartTotalCount, setCartTotalCount] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
+  const [cartCost, setCartCost] = useState(0);
+  const [cartProductsCost, setCartProductsCost] = useState(0);
+  const [cartDeliveryCost, setCartDeliveryCost] = useState(0);
   const products = COFFEE_LIST;
 
   function findProductById(id: string) {
@@ -64,31 +73,43 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     if (!cart) setCartProducts([]);
     else {
       let count = 0;
+      let cost = 0;
+      let delivery = 0;
       setCartProducts(cart.map(order => {
         const { id, quantity } = order;
         const product = findProductById(id);
         if (product) {
           count += quantity;
+          cost += product.price * quantity;
+          delivery = 10;
           return {
             ...product,
             quantity
           };
         }
       }));
-      setCartTotalCount(count);
+      setCartCount(count);
+      setCartCost(cost + delivery);
+      setCartProductsCost(cost);
+      setCartDeliveryCost(delivery);
     }
   }, [cart]);
 
   return (
     <CartContext.Provider value={{
+      // props
       products,
-      findProductById,
+      cartCount,
+      cartCost,
       cartProducts,
+      cartProductsCost,
+      cartDeliveryCost,
+      // functions
+      findProductById,
       addOrUpdateCart,
       removeFromCart,
       incrementCart,
       decrementCart,
-      cartTotalCount,
     }} >
       {children}
     </CartContext.Provider>
