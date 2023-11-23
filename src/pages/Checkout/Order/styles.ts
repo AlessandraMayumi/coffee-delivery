@@ -23,4 +23,8 @@ export const ButtonContainer = styled.button`
     padding: 1rem;
     text-transform: uppercase;
     font-weight: bold;
+
+    &:hover {
+        background: ${props => props.theme['yellow-dark']};
+    }
 `;

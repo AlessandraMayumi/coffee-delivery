@@ -1,7 +1,13 @@
-import { TotalContainer, ButtonContainer } from './styles';
-import { ProductCart } from './ProductCart';
 import { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+// Context
 import { CartContext } from '../../../context/CartContext';
+// Constants
+import { ROUTE_SUCCESS } from '../../../constants/routes';
+// Components
+import { ProductCart } from './ProductCart';
+// Styles
+import { TotalContainer, ButtonContainer } from './styles';
 
 export function Order() {
   // Context
@@ -36,7 +42,9 @@ export function Order() {
           </tbody>
         </table>
       </TotalContainer>
-      <ButtonContainer>Confirm order</ButtonContainer>
+      <NavLink to={ROUTE_SUCCESS}>
+        <ButtonContainer>Confirm order</ButtonContainer>
+      </NavLink>
     </span>
   );
 }
