@@ -5,6 +5,7 @@ import { Router } from './Router';
 import { BrowserRouter } from 'react-router-dom';
 import { CartContextProvider } from './context/CartContext';
 import { AddressContextProvider } from './context/AddressContext';
+import { PaymentContextProvider } from './context/PaymentContext';
 
 function App() {
 
@@ -12,9 +13,11 @@ function App() {
     <ThemeProvider theme={defaultTheme}>
       <CartContextProvider>
         <AddressContextProvider>
-          <BrowserRouter>
-            <Router />
-          </BrowserRouter>
+          <PaymentContextProvider>
+            <BrowserRouter>
+              <Router />
+            </BrowserRouter>
+          </PaymentContextProvider>
         </AddressContextProvider>
       </CartContextProvider>
       <GlobalStyle />
