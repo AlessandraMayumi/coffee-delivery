@@ -16,3 +16,46 @@ export const ProductListContainer = styled.div`
   flex-wrap: wrap;
   gap: 2rem
 `;
+
+export const IntroContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin: 4rem 0;
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 400;
+    margin-top: -5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+`;
+
+export const DescriptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const TopicsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  span {
+    display: flex;
+    flex-direction: row;
+    gap: .8rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+`;

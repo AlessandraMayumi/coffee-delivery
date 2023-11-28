@@ -18,6 +18,13 @@ Although there are only a few functionalities, it require concepts such as:
 - Properties
 - Componentization
 
+### Home
+![alt text](./public/home.png)
+### Checkout
+![alt text](./public/checkout.png)
+### Success
+![alt text](./public/success.png)
+
 ### Figma
 https://www.figma.com/file/5yT9ZzZmRQRS4yivGGB3pl/Coffee-Delivery/duplicate
 
