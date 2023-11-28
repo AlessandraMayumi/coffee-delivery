@@ -268,7 +268,26 @@ function addOrUpdateCart(order: OrderType) {
 }
 ```
 
-### TODO: use local storage to refresh the page
+## Storing states in local storage using React and Context API
+
+The context provider, updates the state in response to changes, and handle storing and retrieving data from local storage.
+
+This pattern uses useEffect in the provider to save changes to local storage whenever the state changes. Also, it retrieves the initial state from local storage when the application loads.
+```js
+export const MyProvider = ({ children }) => {
+  const [myState, setMyState] = useState(() => {
+    // Retrieve data from local storage or set default value
+    const storedState = localStorage.getItem('myState');
+    return storedState ? JSON.parse(storedState) : /* default state */;
+  });
+
+  useEffect(() => {
+    // Store data in local storage when state changes
+    localStorage.setItem('myState', JSON.stringify(myState));
+  }, [myState]);
+...
+```
+
 
 
 ## React + TypeScript + Vite

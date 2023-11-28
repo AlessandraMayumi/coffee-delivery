@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 
 // Types
 interface ProviderProps {
@@ -18,10 +18,19 @@ interface PaymentContextType {
 export const PaymentContext = createContext({} as PaymentContextType);
 
 export function PaymentContextProvider({ children }: ProviderProps) {
-  const [method, setMethod] = useState('' as PaymentMethod);
+  const [method, setMethod] = useState(() => {
+    // Retrieve data from local storage or set default value
+    const storedState = localStorage.getItem('@coffee-delivery: method');
+    return storedState ? JSON.parse(storedState) : '';
+  });
 
-  function updateMethod(newMethod: PaymentMethod) {
-    setMethod(newMethod);
+  useEffect(() => {
+    const stateJson = JSON.stringify(method);
+    localStorage.setItem('@coffee-delivery: method', stateJson);
+  }, [method]);
+
+  function updateMethod(newMethod: PaymentMethod): void {
+    return setMethod(newMethod);
   }
 
   return (
