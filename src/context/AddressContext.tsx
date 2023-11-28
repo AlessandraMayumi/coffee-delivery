@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 
 // Types
 interface ProviderProps {
@@ -20,7 +20,15 @@ interface AddressContextType {
 export const AddressContext = createContext({} as AddressContextType);
 
 export function AddressContextProvider({ children }: ProviderProps) {
-  const [address, setAddress] = useState({} as AddressType);
+  const [address, setAddress] = useState(() => {
+    const storedState = localStorage.getItem('@coffee-delivery: address');
+    return storedState ? JSON.parse(storedState) : {} as AddressType;
+  });
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(address);
+    localStorage.setItem('@coffee-delivery: address', stateJSON);
+  }, [address]);
 
   function updateAddressByField(field: string, value: string): void {
     switch (field) {
