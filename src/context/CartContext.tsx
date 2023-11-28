@@ -37,12 +37,33 @@ export const CartContext = createContext({} as CartContextType);
 /** Context Provider */
 export function CartContextProvider({ children }: CartContextProviderProps) {
   // State
-  const [cart, dispatch] = useReducer(reducerCart, []);
-  const [cartProducts, setCartProducts] = useState<(CartProductType | undefined)[]>([]);
-  const [cartCount, setCartCount] = useState(0);
-  const [cartCost, setCartCost] = useState(0);
-  const [cartProductsCost, setCartProductsCost] = useState(0);
-  const [cartDeliveryCost, setCartDeliveryCost] = useState(0);
+  const [cart, dispatch] = useReducer(
+    reducerCart, 
+    [],
+    () => {
+      const storedState = localStorage.getItem('@coffee-delivery: cart');
+      return storedState ? JSON.parse(storedState) : [];
+    });
+  const [cartProducts, setCartProducts] = useState<(CartProductType | undefined)[]>(() => {
+    const storedState = localStorage.getItem('@coffee-delivery: cartProducts');
+    return storedState ? JSON.parse(storedState) : [];
+  });
+  const [cartCount, setCartCount] = useState(() => {
+    const storedState = localStorage.getItem('@coffee-delivery: cartCount');
+    return storedState ? JSON.parse(storedState) : 0;
+  });
+  const [cartCost, setCartCost] = useState(() => {
+    const storedState = localStorage.getItem('@coffee-delivery: cartCost');
+    return storedState ? JSON.parse(storedState) : 0;
+  });
+  const [cartProductsCost, setCartProductsCost] = useState(() => {
+    const storedState = localStorage.getItem('@coffee-delivery: cartProductsCost');
+    return storedState ? JSON.parse(storedState) : 0;
+  });
+  const [cartDeliveryCost, setCartDeliveryCost] = useState(() => {
+    const storedState = localStorage.getItem('@coffee-delivery: cartDeliveryCost');
+    return storedState ? JSON.parse(storedState) : 0;
+  });
   const products = COFFEE_LIST;
 
   function findProductById(id: string) {
@@ -66,9 +87,6 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   }
 
   useEffect(() => {
-    // const stateJSON = JSON.stringify(cart);
-    // localStorage.setItem('@coffee-delivery:cart-state', stateJSON);
-
     // list all products in the cart
     if (!cart) setCartProducts([]);
     else {
@@ -93,7 +111,28 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       setCartProductsCost(cost);
       setCartDeliveryCost(delivery);
     }
+    localStorage.setItem('@coffee-delivery: cart', JSON.stringify(cart));
   }, [cart]);
+
+  useEffect(() => {
+    localStorage.setItem('@coffee-delivery: cartProducts', JSON.stringify(cartProducts));
+  }, [cartProducts]);
+
+  useEffect(() => {
+    localStorage.setItem('@coffee-delivery: cartCount', JSON.stringify(cartCount));
+  }, [cartCount]);
+
+  useEffect(() => {
+    localStorage.setItem('@coffee-delivery: cartCost', JSON.stringify(cartCost));
+  }, [cartCost]);
+
+  useEffect(() => {
+    localStorage.setItem('@coffee-delivery: cartProductsCost', JSON.stringify(cartProductsCost));
+  }, [cartProductsCost]);
+
+  useEffect(() => {
+    localStorage.setItem('@coffee-delivery: cartDeliveryCost', JSON.stringify(cartDeliveryCost));
+  }, [cartDeliveryCost]);
 
   return (
     <CartContext.Provider value={{

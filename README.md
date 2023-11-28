@@ -288,6 +288,29 @@ export const MyProvider = ({ children }) => {
 ...
 ```
 
+### Using `useReducer` instead of `useState`
+
+```js
+  const [cyclesState, dispatch] = useReducer(
+    cycleReducer,
+    initialState,
+    (initArgs) => {
+      const storedStateJSON = localStorage.getItem('@tomato:cycles-state');
+      if (storedStateJSON) {
+        const parsedState = JSON.parse(storedStateJSON);
+        return parsedState;
+      }
+      return initArgs;
+    }
+  );
+
+  useEffect(() => {
+    // Store data in local storage when state changes
+    localStorage.setItem('@tomato:cycles-state', JSON.stringify(cyclesState));
+  }, [cyclesState]);
+  ...
+```
+
 
 
 ## React + TypeScript + Vite
