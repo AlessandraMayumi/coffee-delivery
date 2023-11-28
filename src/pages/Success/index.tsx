@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { AddressContext } from '../../context/AddressContext';
 import { InfoContainer, ResumeContainer, SuccessContainer } from './styles';
 import banner from '../../assets/banner-success.svg';
 import local from '../../assets/icon-local.svg';
@@ -5,7 +7,9 @@ import time from '../../assets/icon-time.svg';
 import payment from '../../assets/icon-payment.svg';
 
 export function Success() {
-  // TODO: initial state isSuccess to redirect 
+  const { address } = useContext(AddressContext);
+  const { state, city, address: street, complement } = address;
+
   return (
     <SuccessContainer>
       <ResumeContainer>
@@ -15,8 +19,8 @@ export function Success() {
           <span>
             <img src={local} />
             <div>
-              <p>Delivery on <strong>100 St VARIABLE</strong></p>
-              <p>City, SP VARIABLE</p>
+              <p>Delivery on <strong>{street} {complement}</strong></p>
+              <p>{city}, {state}</p>
             </div>
           </span>
           <span>
